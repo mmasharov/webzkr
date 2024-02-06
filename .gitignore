@@ -1,0 +1,20 @@
+# Dependencies
+
+node_modules/
+
+# Virtual Enviroment
+
+.venv/
+
+# Cache
+
+__pycache__/
+
+# Database
+
+/assets/zkr.db
+
+# Generated scripts
+
+/script.js
+/script.js.map

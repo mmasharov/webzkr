@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Заявка на кассовый расход</title>
+    <link rel="stylesheet" href="style.min.css">
+</head>
+<body>
+    <h1 class="title">Заявка на кассовый расход</h1>
+    <div class="zkr">
+        <h4>Пакеты заявок на кассовый расход</h4>
+        <div id="zkrpacklist" class="zkr__list">
+            <div class="zkr__list_item zkr__list_item-pack">
+                <div id="finished">Зап</div>
+                <div id="exported">Выг</div>
+                <div id="number">Номер</div>
+                <div id="ubp_name">Название УБП</div>
+                <div id="tofk_name">Название ТОФК</div>
+            </div>
+            <!-- Generated Content Here -->
+        </div>
+        <h4>Заявки на кассовый расход в пакете</h4>
+        <div id="zkrlist" class="zkr__list">
+            <div class="zkr__list_item zkr__list_item-zr">
+                <div id="zkr_id">ИД</div>
+                <div id="nom_pack">Пакет</div>
+                <div id="date_zr">Дата</div>
+                <div id="name_ubp_pay">Название УБП</div>
+                <div id="sum_v">Сумма</div>
+            </div>
+            <!-- Generated Content Here -->
+        </div>
+        <h4>Строки заявки на кассовый расход</h4>
+        <div id="zkrstrlist" class="zkr__list">
+            <div class="zkr__list_item zkr__list_item-str">
+                <div id="str_id">ИД</div>
+                <div id="nom_zr">Заявка</div>
+                <div id="kbk_type">Тип КБК</div>
+                <div id="kbk_pay">КБК</div>
+                <div id="kbk_sum">Сумма</div>
+            </div>
+            <!-- Generated Content Here -->
+        </div>
+        <form action="#" class="zkr__form">
+            <h4>Почтовая информация об отправителе файла</h4>
+            <div id="from" class="zkr__block">
+                <div class="zkr__item">
+                    <label for="from-budg_level">Уровень бюджета</label>
+                    <select name="from-budg_level" id="from-budg_level">
+                        <!-- Scripted content here -->
+                    </select>
+                </div>
+                <div class="zkr__item">
+                    <label for="from-kod_ubp">Код клиента</label>
+                    <input name="from-kod_ubp" id="from-kod_ubp" type="text" size="8" maxlength="8">
+                </div>
+                <div class="zkr__item">
+                    <label for="from-name_ubp">Наименование клиента</label>
+                    <input name="from-name_ubp" id="from-name_ubp" type="text" maxlength="2000">
+                </div>
+            </div>
+            <h4>Почтовая информация о получателе файла</h4>
+            <div id="to" class="zkr__block">
+                <div class="zkr__item">
+                    <label for="to-kod_tofk">Код ТОФК</label>
+                    <input name="to-kod_tofk" id="to-kod_tofk" type="text" size="4" maxlength="4">
+                </div>
+                <div class="zkr__item">
+                    <label for="to-name_tofk">Наименование ТОФК</label>
+                    <input name="to-name_tofk" id="to-name_tofk" type="text" maxlength="2000">
+                </div>
+            </div>
+            <h4>Реквизиты конфиденциальности</h4>
+            <div id="secure" class="zkr__block">
+                <div class="zkr__item">
+                    <label for="secure-level">Уровень конфиденциальности</label>
+                    <select name="secure-level" id="secure-level">
+                        <!-- Scripted content here -->
+                    </select>
+                </div>
+                <div class="zkr_item">
+                    <label for="secure-cause">Пункт перечня</label>
+                    <input name="secure-cause" id="secure-cause" type="text" maxlength="150">
+                </div>
+            </div>
+            <h4>Общая информация</h4>
+            <div id="zr" class="zkr__block">
+                <div class="zkr__block_sub">
+                    <div class="zkr_item">
+                        <label for="zr-guid_fk">Глобальный уникальный идентификатор</label>
+                        <input name="zr-guid_fk" id="zr-guid_fk" type="text">
+                    </div>
+                </div>
+                <div class="zkr__block_sub">
+                    <div class="zkr__item">
+                        <label for="zr-type">Тип заявки</label>
+                        <select name="zr-type" id="zr-type">
+                            <!-- Scripted content here -->
+                        </select>
+                    </div>
+                    <div class="zkr_item">
+                        <label for="zr-nom_zr">Номер заявки</label>
+                        <input name="zr-nom_zr" id="zr-nom_zr" type="text" size="15" maxlength="15">
+                    </div>
+                    <div class="zkr_item">
+                        <label for="zr-date_zr">Дата заявки</label>
+                        <input name="zr-date_zr" id="zr-date_zr" type="date">
+                    </div>
+                </div>
+                <div class="zkr__block_sub">
+                    <div class="zkr__item">
+                        <label for="zr-kod_ubp_pay">Код клиента</label>
+                        <input name="zr-kod_ubp_pay" id="zr-kod_ubp_pay" type="text" size="8" maxlength="8">
+                    </div>
+                    <div class="zkr__item">
+                        <label for="zr-name_ubp_pay">Наименование клиента</label>
+                        <input name="zr-name_ubp_pay" id="zr-name_ubp_pay" type="text" maxlength="2000">
+                    </div>
+                    <div class="zkr__item">
+                        <label for="zr-ls_ubp_pay">Номер лицевого счета клиента</label>
+                        <input name="zr-ls_ubp_pay" id="zr-ls_ubp_pay" type="text" size="11" maxlength="11">
+                    </div>
+                    <div class="zkr__item">
+                        <label for="zr-inn_ubp">ИНН клиента</label>
+                        <input name="zr-inn_ubp" id="zr-inn_ubp" type="text" size="12" maxlength="12">
+                    </div>
+                    <div class="zkr__item">
+                        <label for="zr-kpp_ubp">КПП клиента</label>
+                        <input name="zr-kpp_ubp" id="zr-kpp_ubp" type="text" size="9" maxlength="9">
+                    </div>
+                </div>
+                <div class="zkr__block_sub">
+                    <div class="zkr__item">
+                        <label for="zr-glava_grs">Глава по БК</label>
+                        <input name="zr-glava_grs" id="zr-glava_grs" type="text" size="3" maxlength="3">
+                    </div>
+                    <div class="zkr__item">
+                        <label for="zr-name_ubp_grs">Наименование ГРБС (ГАИФДБ)</label>
+                        <input name="zr-name_ubp_grs" id="zr-name_ubp_grs" type="text" maxlength="2000">
+                    </div>
+                    <div class="zkr__item">
+                        <label for="zr-name_bud">Наименование бюджета</label>
+                        <input name="zr-name_bud" id="zr-name_bud" type="text" maxlength="512">
+                    </div>
+                    <div class="zkr__item">
+                        <label for="zr-name_fo">Наименование финансового органа</label>
+                        <input name="zr-name_fo" id="zr-name_fo" type="text" maxlength="2000">
+                    </div>
+                    <div class="zkr__item">
+                        <label for="zr-okpo_fo">Код по ОКПО</label>
+                        <input name="zr-okpo_fo" id="zr-okpo_fo" type="text" size="8" maxlength="8">
+                    </div>
+                </div>
+                <div class="zkr__block_sub">
+                    <div class="zkr__item">
+                        <label for="zr-kod_tofk">Код органа ФК</label>
+                        <input name="zr-kod_tofk" id="zr-kod_tofk" type="text" size="4" maxlength="4">
+                    </div>
+                    <div class="zkr__item">
+                        <label for="zr-name_tofk">Наименование органа ФК</label>
+                        <input name="zr-name_tofk" id="zr-name_tofk" type="text" maxlength="2000">
+                    </div>
+                    <div class="zkr_item">
+                        <label for="zr-date_isp">Предельная дата исполнения</label>
+                        <input name="zr-date_isp" id="zr-date_isp" type="date">
+                    </div>
+                </div>
+                <div class="zkr__block_sub">
+                    <div class="zkr__item">
+                        <label for="zr-guid_sv">Идентификатор документа «Сведения о бюджетном обязательстве», «Сведения о соглашении», предоставленного в ТОФК</label>
+                        <input name="zr-guid_sv" id="zr-guid_sv" type="text">
+                    </div>
+                    <div class="zkr__item">
+                        <label for="zr-nom_bo">Номер обязательства</label>
+                        <input name="zr-nom_bo" id="zr-nom_bo" type="text" size="19" maxlength="19">
+                    </div>
+                </div>
+                <div class="zkr__item">
+                    <label for="zr-kod_isp">Код приоритета исполнения</label>
+                    <input name="zr-kod_isp" id="zr-kod_isp" type="text" size="1" maxlength="1">
+                </div>
+                <div class="zkr__item">
+                    <label for="zr-pr_isp">Приоритет исполнения</label>
+                    <input name="zr-pr_isp" id="zr-pr_isp" type="text" maxlength="250">
+                </div>
+                <div class="zkr__item">
+                    <label for="zr-faip_code">Код объекта по ФАИП (КМИ)</label>
+                    <input name="zr-faip_code" id="zr-faip_code" type="text" size="24" maxlength="24">
+                </div>
+                <div class="zkr__block_sub">
+                    <div class="zkr__item">
+                        <label for="zr-sum_v">Сумма документа в валюте выплаты</label>
+                        <input name="zr-sum_v" id="zr-sum_v" type="text">
+                    </div>
+                    <div class="zkr__item">
+                        <label for="zr-kod_v">Код валюты по ОКВ</label>
+                        <input name="zr-kod_v" id="zr-kod_v" type="text" size="3" maxlength="3">
+                    </div>
+                    <div class="zkr__item">
+                        <label for="zr-sum_doc">Сумма документа</label>
+                        <input name="zr-sum_doc" id="zr-sum_doc" type="text">
+                    </div>
+                </div>
+                <div class="zkr__block_sub">
+                    <div class="zkr__item">
+                        <label for="zr-type_ap">Признак авансового платежа</label>
+                        <select name="zr-type_ap" id="zr-type_ap">
+                            <!-- Scripted content here -->
+                        </select>
+                    </div>
+                    <div class="zkr__item">
+                        <label for="zr-order_pl">Очередность платежа</label>
+                        <input name="zr-order_pl" id="zr-order_pl" type="text" size="1" maxlength="1">
+                    </div>
+                    <div class="zkr__item">
+                        <label for="zr-vid_pl">Вид платежа</label>
+                        <select name="zr-vid_pl" id="zr-vid_pl">
+                            <!-- Scripted content here -->
+                        </select>
+                    </div>
+                    <div class="zkr__item">
+                        <label for="zr-purpose">Назначение платежа</label>
+                        <input name="zr-purpose" id="zr-purpose" type="text" maxlength="210">
+                    </div>
+                </div>
+                <div class="zkr__item">
+                    <label for="zr-kod_income">Код вида дохода</label>
+                    <select name="zr-kod_income" id="zr-kod_income">
+                        <!-- Scripted content here -->
+                    </select>
+                </div>
+                <div class="zkr__block_sub">
+                    <div class="zkr__item">
+                        <label for="zr-name_rcp">Наименование / ФИО контрагента</label>
+                        <input name="zr-name_rcp" id="zr-name_rcp" type="text" maxlength="160">
+                    </div>
+                    <div class="zkr__item">
+                        <label for="zr-inn_rcp">ИНН контрагента</label>
+                        <input name="zr-inn_rcp" id="zr-inn_rcp" type="text" size="12" maxlength="12">
+                    </div>
+                    <div class="zkr__item">
+                        <label for="zr-kpp_rcp">КПП контрагента</label>
+                        <input name="zr-kpp_rcp" id="zr-kpp_rcp" type="text" size="9" maxlength="9">
+                    </div>
+                    <div class="zkr__item">
+                        <label for="zr-ls_ubp_rcp">Лицевой счет контрагента</label>
+                        <input name="zr-ls_ubp_rcp" id="zr-ls_ubp_rcp" type="text" size="11" maxlength="11">
+                    </div>
+                    <div class="zkr__item">
+                        <label for="zr-bs_rcp">Счет контрагента</label>
+                        <input name="zr-bs_rcp" id="zr-bs_rcp" type="text" size="34" maxlength="34">
+                    </div>
+                    <div class="zkr__item">
+                        <label for="zr-name_bic_rcp">Наименование банка контрагента</label>
+                        <input name="zr-name_bic_rcp" id="zr-name_bic_rcp" type="text" maxlength="160">
+                    </div>
+                    <div class="zkr__item">
+                        <label for="zr-bic_rcp">БИК банка контрагента/ТОФК</label>
+                        <input name="zr-bic_rcp" id="zr-bic_rcp" type="text" size="9" maxlength="9">
+                    </div>
+                    <div class="zkr__item">
+                        <label for="zr-ks_bic_rcp">Корсчет банка контрагента/ТОФК</label>
+                        <input name="zr-ks_bic_rcp" id="zr-ks_bic_rcp" type="text" size="34" maxlength="34">
+                    </div>
+                </div>
+                <div class="zkr__item">
+                    <label for="zr-paystatus">Статус налогоплательщика</label>
+                    <input name="zr-paystatus" id="zr-paystatus" type="text" size="2" maxlength="2">
+                </div>
+                <div class="zkr__item">
+                    <label for="zr-kdoh">Код бюджетной классификации</label>
+                    <input name="zr-kdoh" id="zr-kdoh" type="text" size="20" maxlength="20">
+                </div>
+                <div class="zkr__item">
+                    <label for="zr-okato">Код по ОКТМО</label>
+                    <input name="zr-okato" id="zr-okato" type="text" size="8" maxlength="8">
+                </div>
+                <div class="zkr__item">
+                    <label for="zr-osn_pl">Показатель основания платежа</label>
+                    <input name="zr-osn_pl" id="zr-osn_pl" type="text" size="2" maxlength="2">
+                </div>
+                <div class="zkr__item">
+                    <label for="zr-nal_per">Показатель налогового периода / кода таможенного органа</label>
+                    <input name="zr-nal_per" id="zr-nal_per" type="text" size="10" maxlength="10">
+                </div>
+                <div class="zkr__item">
+                    <label for="zr-nom_dok">Показатель номера документа</label>
+                    <input name="zr-nom_dok" id="zr-nom_dok" type="text" size="15" maxlength="15">
+                </div>
+                <div class="zkr__item">
+                    <label for="zr-date_dok">Показатель даты документа</label>
+                    <input name="zr-date_dok" id="zr-date_dok" type="text" size="10" maxlength="10">
+                </div>
+                <div class="zkr__item">
+                    <label for="zr-type_pl">Тип платежа</label>
+                    <input name="zr-type_pl" id="zr-type_pl" type="text" size="2" maxlength="2">
+                </div>
+                <div class="zkr__item">
+                    <label for="zr-id_pp">Идентификатор платежного документа</label>
+                    <input name="zr-id_pp" id="zr-id_pp" type="text" size="18" maxlength="18">
+                </div>
+                <div class="zkr__item">
+                    <label for="zr-period_pay">Период оплаты</label>
+                    <input name="zr-period_pay" id="zr-period_pay" type="text">
+                </div>
+                <div class="zkr__item">
+                    <label for="zr-jnt_ls">Единый лицевой счет</label>
+                    <input name="zr-jnt_ls" id="zr-jnt_ls" type="text" size="10" maxlength="10">
+                </div>
+                <div class="zkr__item">
+                    <label for="zr-id_zhku">Идентификатор жилищно-коммунальной услуги</label>
+                    <input name="zr-id_zhku" id="zr-id_zhku" type="text" size="13" maxlength="13">
+                </div>
+                <div class="zkr__block_sub">
+                    <div class="zkr__item">
+                        <label for="zr-dol_ruk_ubp">Должность руководителя (уполномоченного им лица)</label>
+                        <input name="zr-dol_ruk_ubp" id="zr-dol_ruk_ubp" type="text" maxlength="100">
+                    </div>
+                    <div class="zkr__item">
+                        <label for="zr-name_ruk_ubp">ФИО руководителя (уполномоченного им лица)</label>
+                        <input name="zr-name_ruk_ubp" id="zr-name_ruk_ubp" type="text" maxlength="50">
+                    </div>
+                    <div class="zkr__item">
+                        <label for="zr-dol_buh_ubp">Должность главного бухгалтера (уполномоченного руководителем лица)</label>
+                        <input name="zr-dol_buh_ubp" id="zr-dol_buh_ubp" type="text" maxlength="100">
+                    </div>
+                    <div class="zkr__item">
+                        <label for="zr-name_buh_ubp">ФИО главного бухгалтера (уполномоченного руководителем лица)</label>
+                        <input name="zr-name_buh_ubp" id="zr-name_buh_ubp" type="text" maxlength="50">
+                    </div>
+                    <div class="zkr_item">
+                        <label for="zr-date_pod_ubp">Дата подписания заявки</label>
+                        <input name="zr-date_pod_ubp" id="zr-date_pod_ubp" type="date">
+                    </div>
+                </div>
+                <div class="zkr__block_sub">
+                    <div class="zkr__item">
+                        <label for="zr-nom_zr_fk">Отметка ТОФК о постановке на учет / Номер заявки</label>
+                        <input name="zr-nom_zr_fk" id="zr-nom_zr_fk" type="text" size="15" maxlength="15">
+                    </div>
+                    <div class="zkr_item">
+                        <label for="zr-date_fk">Отметка ТОФК о постановке на учет / Дата постановки на учет</label>
+                        <input name="zr-date_fk" id="zr-date_fk" type="date">
+                    </div>
+                    <div class="zkr__item">
+                        <label for="zr-dol_isp_fk">Отметка ТОФК о постановке на учет / Должность ответственного исполнителя</label>
+                        <input name="zr-dol_isp_fk" id="zr-dol_isp_fk" type="text" maxlength="100">
+                    </div>
+                    <div class="zkr__item">
+                        <label for="zr-name_isp_fk">Отметка ТОФК о постановке на учет / ФИО ответственного исполнителя</label>
+                        <input name="zr-name_isp_fk" id="zr-name_isp_fk" type="text" maxlength="50">
+                    </div>
+                    <div class="zkr__item">
+                        <label for="zr-tel_isp_fk">Отметка ТОФК о постановке на учет / Телефон ответственного исполнителя</label>
+                        <input name="zr-tel_isp_fk" id="zr-tel_isp_fk" type="text" maxlength="50">
+                    </div>
+                </div>
+            </div>
+            <h4>Информация об оплате контрактов, соглашений</h4>
+            <div id="zrcontr" class="zkr__block">
+                <div class="zkr__item">
+                    <label for="zrcontr-nom_register">Номер реестровой записи</label>
+                    <input name="zrcontr-nom_register" id="zrcontr-nom_register" type="text" size="27" maxlength="27">
+                </div>
+                <div class="zkr__item">
+                    <label for="zrcontr-id_doc">Идентификатор документа о приемке/этапа</label>
+                    <input name="zrcontr-id_doc" id="zrcontr-id_doc" type="text" size="20" maxlength="20">
+                </div>
+                <div class="zkr__item">
+                    <label for="zrcontr-vid_reestr">Вид реестра</label>
+                    <input name="zrcontr-vid_reestr" id="zrcontr-vid_reestr" type="text" size="2" maxlength="2">
+                </div>
+            </div>
+            <h4>Реквизиты документов-оснований</h4>
+            <div id="zrosn" class="zkr__block">
+                <div class="zkr__item">
+                    <label for="zrosn-osn_plat">Признак основания платежа</label>
+                    <select name="zrosn-osn_plat" id="zrosn-osn_plat">
+                        <!-- Scripted content here -->
+                    </select>
+                </div>
+                <div class="zkr__item">
+                    <label for="zrosn-vid_osn">Вид документа-основания</label>
+                    <input name="zrosn-vid_osn" id="zrosn-vid_osn" type="text" maxlength="50">
+                </div>
+                <div class="zkr__item">
+                    <label for="zrosn-nom_osn">Номер документа-основания</label>
+                    <input name="zrosn-nom_osn" id="zrosn-nom_osn" type="text" maxlength="100">
+                </div>
+                <div class="zkr__item">
+                    <label for="zrosn-date_osn">Дата документа-основания</label>
+                    <input name="zrosn-date_osn" id="zrosn-date_osn" type="date">
+                </div>
+                <div class="zkr__item">
+                    <label for="zrosn-osn">Предмет документа-основания</label>
+                    <input name="zrosn-osn" id="zrosn-osn" type="text" maxlength="512">
+                </div>
+            </div>
+            <h4>Строки заявки на кассовый расход по бюджетной классификации</h4>
+            <div id="zrst" class="zkr__block">
+                <div class="zkr__item">
+                    <label for="zrst-kod_ist_kbk">Источник средств</label>
+                    <select name="zrst-kod_ist_kbk" id="zrst-kod_ist_kbk">
+                        <!-- Scripted content here -->
+                    </select>
+                </div>
+                <div class="zkr__item">
+                    <label for="zrst-type_kbk_pay">Тип КБК плательщика</label>
+                    <select name="zrst-type_kbk_pay" id="zrst-type_kbk_pay">
+                        <!-- Scripted content here -->
+                    </select>
+                </div>
+                <div class="zkr__item">
+                    <label for="zrst-kbk_pay">Код по БК плательщика</label>
+                    <input name="zrst-kbk_pay" id="zrst-kbk_pay" type="text" size="20" maxlength="20">
+                </div>
+                <div class="zkr__item">
+                    <label for="zrst-type_kbk_rcp">Тип КБК получателя</label>
+                    <select name="zrst-type_kbk_rcp" id="zrst-type_kbk_rcp">
+                        <!-- Scripted content here -->
+                    </select>
+                </div>
+                <div class="zkr__item">
+                    <label for="zrst-kbk_rcp">Код по БК получателя</label>
+                    <input name="zrst-kbk_rcp" id="zrst-kbk_rcp" type="text" size="20" maxlength="20">
+                </div>
+                <div class="zkr__item">
+                    <label for="zrst-add_klass_pay">Код цели (аналитический код) плательщика</label>
+                    <input name="zrst-add_klass_pay" id="zrst-add_klass_pay" type="text" size="25" maxlength="25">
+                </div>
+                <div class="zkr__item">
+                    <label for="zrst-add_klass_rcp">Код цели субсидии / субвенции получателя</label>
+                    <input name="zrst-add_klass_rcp" id="zrst-add_klass_rcp" type="text" size="20" maxlength="20">
+                </div>
+                <div class="zkr__item">
+                    <label for="zrst-sum_v_kbk">Сумма в валюте заявки</label>
+                    <input name="zrst-sum_v_kbk" id="zrst-sum_v_kbk" type="text">
+                </div>
+                <div class="zkr__item">
+                    <label for="zrst-sum_r_kbk">Сумма в рублях</label>
+                    <input name="zrst-sum_r_kbk" id="zrst-sum_r_kbk" type="text">
+                </div>
+                <div class="zkr__item">
+                    <label for="zrst-purpose_kbk">Назначение платежа</label>
+                    <input name="zrst-purpose_kbk" id="zrst-purpose_kbk" type="text" maxlength="210">
+                </div>
+                <div class="zkr__item">
+                    <label for="zrst-note_kbk">Примечание</label>
+                    <input name="zrst-note_kbk" id="zrst-note_kbk" type="text" maxlength="254">
+                </div>
+                <div class="zkr__item">
+                    <button id="zrst-add_str">Добавить строку</button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <script src="script.js" type="text/javascript"></script>
+</body>
+</html>
