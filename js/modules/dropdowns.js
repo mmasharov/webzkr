@@ -3,7 +3,7 @@ import { getResource } from "../services/requests.js";
 function fillDropdown(parent, data) {
     for (let item in data) {
         const menuItem = document.createElement('option');
-        menuItem.setAttribute('name', item);
+        menuItem.setAttribute('value', item);
         menuItem.textContent = `${item} - ${data[item]}`;
         parent.appendChild(menuItem);
     }

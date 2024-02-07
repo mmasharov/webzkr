@@ -20,6 +20,25 @@ def getZkrPackList(db):
 
     return zkr_list
 
+def getZkrPack(db, pack_id):
+    """Получение информации о пакете заявок"""
+    with UseMyDatabase(db) as cursor:
+        _SQL = f'SELECT budg_level, kod_ubp, name_ubp, kod_tofk, name_tofk, level, cause FROM zkr_pack WHERE zkr_pack_id == {pack_id}'
+        cursor.execute(_SQL)
+        data = cursor.fetchall()
+    
+    packdata = {}
+    for item in data:
+        packdata['from-budg_level'] = item[0]
+        packdata['from-kod_ubp'] = item[1]
+        packdata['from-name_ubp'] = item[2]
+        packdata['to-kod_tofk'] = item[3]
+        packdata['to-name_tofk'] = item[4]
+        packdata['secure-level'] = item[5]
+        packdata['secure-cause'] = item[6]
+    
+    return packdata
+
 def getZkrList(db, parent_id):
     """Получение списка ЗКР в пакете"""
     with UseMyDatabase(db) as cursor:

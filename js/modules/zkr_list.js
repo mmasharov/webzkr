@@ -25,6 +25,12 @@ function fillZkrList(parent, data, mod) {
     }
 }
 
+function fillZkrInfo(data) {
+    for (let item in data) {
+        document.querySelector(`#${item}`).value = data[item];
+    }
+}
+
 const zkrPackList = async (id) => {
     await getResource('http://localhost:8000/zkr_pack/')
         .then(res => fillZkrList(id, res, 'pack'));
@@ -41,4 +47,9 @@ const zkrStrList = async (id, parent_id) => {
         .then(res => fillZkrList(id, res, 'str'));
 }
 
-export { zkrPackList, zkrList, zkrStrList };
+const fillZkrPack = async (id) => {
+    await getResource(`http://localhost:8000/zkr_pack/${id}`)
+        .then(res => fillZkrInfo(res));
+}
+
+export { zkrPackList, zkrList, zkrStrList, fillZkrPack };

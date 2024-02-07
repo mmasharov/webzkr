@@ -1,6 +1,6 @@
 import { ddList } from "./modules/dropdowns.js";
 import { addZrString } from "./modules/buttons.js";
-import { zkrPackList, zkrList, zkrStrList } from "./modules/zkr_list.js";
+import { zkrPackList, zkrList, zkrStrList, fillZkrPack } from "./modules/zkr_list.js";
 
 const dropdowns = ['from-budg_level', 'secure-level', 'zr-type', 'zr-type_ap', 'zr-vid_pl', 'zr-kod_income',
             'zrosn-osn_plat', 'zrst-kod_ist_kbk', 'zrst-type_kbk_pay', 'zrst-type_kbk_rcp'];
@@ -27,6 +27,9 @@ const packListEvent = (parentId) => {
                         item.remove();
                     }
                 });
+                if (packNum) {
+                    fillZkrPack(packNum);
+                }
             });
         }
     });
@@ -53,4 +56,11 @@ window.addEventListener('DOMContentLoaded', () => {
     addZrString();
     // Заполнение списка пакетов заявок
     renderZkrPackList('#zkrpacklist', packListEvent);
+
+    let test = document.forms['zkrpack'].elements['from-budg_level'].value;
+    console.log(test);
+    document.querySelector('#from-budg_level').addEventListener('change', () => {
+        test = document.forms['zkrpack'].elements['from-budg_level'].value;
+        console.log(test);
+    })
 });
