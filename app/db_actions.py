@@ -1,5 +1,5 @@
-from app.dbconn import UseMyDatabase
 import json
+from app.dbconn import UseMyDatabase
 
 def getZkrPackList(db):
     """Получение списка пакетов ЗКР"""
@@ -76,3 +76,12 @@ def getZkrStrList(db, parent_id):
         zrst_list.append(result)
     
     return zrst_list
+
+def insertZkrPack(db, data_json):
+    data = json.loads(data_json)
+    with UseMyDatabase(db) as cursor:
+        _SQL = """INSERT INTO zkr_pack
+                (format_version, soft_name, soft_version, budg_level, kod_ubp, name_ubp, kod_tofk, name_tofk, level, cause)
+                VALUES
+                ('TXZR220401', 'WebZKR', '1.0', ?, ?, ?, ?, ?, ?, ?)"""
+        cursor.execute(_SQL, (data['from-budg_level'], data['from-kod_ubp'], data['from-name_ubp'], data['to-kod_tofk'], data['to-name_tofk'], data['secure-level'], data['secure-cause'],))

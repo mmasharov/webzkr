@@ -1,7 +1,7 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, Body
 from fastapi.middleware.cors import CORSMiddleware
 from app.dropdown_element import getDropdownElements
-from app.db_actions import getZkrPackList, getZkrList, getZkrStrList, getZkrPack
+from app.db_actions import getZkrPackList, getZkrList, getZkrStrList, getZkrPack, insertZkrPack
 
 origins = ["http://localhost", "http://localhost:4000"]
 db_path = 'assets\\zkr.db'
@@ -19,6 +19,11 @@ myapi.add_middleware(
 def showZkrPackList():
     """Отображение списка пакетов заявок на кассовый расход"""
     return getZkrPackList(db_path)
+
+@myapi.post('/zkr_pack/')
+def writeZkrPack(data = Body()):
+    insertZkrPack(db_path, data)
+
 
 @myapi.get('/zkr_pack/{pack_id}')
 def showZkrPack(pack_id):
