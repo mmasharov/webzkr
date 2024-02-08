@@ -35,11 +35,24 @@ function closePackInfo(callback) {
 function newPack(packNum) {
     const btn = document.querySelector('#newpack'),
         block = document.querySelector('#zkrpack'),
-        formElems = document.forms['zkrpack'].elements;
+        formElems = document.forms['zkrpack'];
     
     btn.addEventListener('click', (e) => {
         e.preventDefault();
-        console.log(formElems);
+        block.style.display = 'block';
+        for (let elem of formElems) {
+            switch(elem.id) {
+                case 'from-budg_level':
+                    elem.value = 1;
+                    break;
+                case 'secure-level':
+                    elem.value = 0;
+                    break;
+                default:
+                    elem.value = '';
+                    break;
+            }
+        }
     });
 }
 
