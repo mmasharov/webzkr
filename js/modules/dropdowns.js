@@ -1,5 +1,6 @@
 import { getResource } from "../services/requests.js";
 
+// Заполнение выпадающих списков опциями
 function fillDropdown(parent, data) {
     for (let item in data) {
         const menuItem = document.createElement('option');

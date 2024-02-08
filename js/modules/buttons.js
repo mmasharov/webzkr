@@ -21,4 +21,26 @@ function addZrString() {
     });
 }
 
-export {addZrString};
+function closePackInfo(callback) {
+    const btn = document.querySelector('#closepack'),
+        block = document.querySelector('#zkrpack');
+
+    btn.addEventListener('click', (e) => {
+        e.preventDefault();
+        block.style.display = 'none';
+        callback();
+    });
+}
+
+function newPack(packNum) {
+    const btn = document.querySelector('#newpack'),
+        block = document.querySelector('#zkrpack'),
+        formElems = document.forms['zkrpack'].elements;
+    
+    btn.addEventListener('click', (e) => {
+        e.preventDefault();
+        console.log(formElems);
+    });
+}
+
+export {addZrString, closePackInfo, newPack};

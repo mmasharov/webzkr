@@ -1,7 +1,7 @@
 from app.dbconn import UseMyDatabase
 import json
 
-def getDropdownElements(db, element):
+def getDropdownElements(db: str, element: str):
     """Получение элементов для выпадающего списка"""
     with UseMyDatabase(db) as cursor:
         _SQL = f'SELECT * from {element} ORDER BY {element}_code ASC;'

@@ -1,13 +1,17 @@
 import { ddList } from "./modules/dropdowns.js";
-import { addZrString } from "./modules/buttons.js";
+import { addZrString, closePackInfo, newPack } from "./modules/buttons.js";
 import { zkrPackList, zkrList, zkrStrList, fillZkrPack } from "./modules/zkr_list.js";
 import { writeZkrPack } from "./modules/zkr_post.js";
 
 const dropdowns = ['from-budg_level', 'secure-level', 'zr-type', 'zr-type_ap', 'zr-vid_pl', 'zr-kod_income',
-            'zrosn-osn_plat', 'zrst-kod_ist_kbk', 'zrst-type_kbk_pay', 'zrst-type_kbk_rcp'];
+            'zrosn-osn_plat', 'zrst-kod_ist_kbk', 'zrst-type_kbk_pay', 'zrst-type_kbk_rcp'],
+            packblock = document.querySelector('#zkrpack'),
+            zkrblock = document.querySelector('#zkritem'),
+            strblock = document.querySelector('#zkrstr');
 
-let packNum = 0;
-let zrNum = 0;
+let packNum = 0,
+    zrNum = 0,
+    strNum = 0;
 
 const renderZkrPackList = async (id, callback) => {
     await zkrPackList(id);
@@ -21,7 +25,8 @@ const packListEvent = (parentId) => {
         if (i !== 0) {
             elem.addEventListener('click', () => {
                 packNum = elem.childNodes[2].textContent;
-                zkrList('#zkrlist', packNum, zrListEvent);
+                packblock.style.display = 'block';
+                zkrList('#zkrlist', packNum, zrListEvent); // Заполняем список заявок в пакете
                 // Очистка списка строк при смене пакета
                 document.querySelector('#zkrstrlist').querySelectorAll('.zkr__list_item').forEach((item, i) => {
                     if (i !== 0) {
@@ -42,13 +47,23 @@ const zrListEvent = () => {
         if (j !== 0) {
             str.addEventListener('click', () => {
                 zrNum = str.childNodes[0].textContent;
-                zkrStrList('#zkrstrlist', zrNum);
+                zkrblock.style.display = 'block';
+                zkrStrList('#zkrstrlist', zrNum); // Заполняем список строк заявки
             });
         }
     });
 };
 
 window.addEventListener('DOMContentLoaded', () => {
+    if (!packNum) {
+        packblock.style.display = 'none';
+    }
+    if (!zrNum) {
+        zkrblock.style.display = 'none';
+    }
+    if (!strNum) {
+        strblock.style.display = 'none';
+    }
     // Заполняем выпадающие списки
     for (let dd of dropdowns) {
         ddList(`#${dd}`);
@@ -58,15 +73,12 @@ window.addEventListener('DOMContentLoaded', () => {
     // Заполнение списка пакетов заявок
     renderZkrPackList('#zkrpacklist', packListEvent);
 
-    // let test = document.forms['zkrpack'].elements['from-budg_level'].value;
-    // console.log(test);
-    // document.querySelector('#from-budg_level').addEventListener('change', () => {
-    //     test = document.forms['zkrpack'].elements['from-budg_level'].value;
-    //     console.log(test);
-    // });
-
+    // Запись в БД нового пакета заявок
     document.querySelector('#addpack').addEventListener('click', (e) => {
         e.preventDefault();
         writeZkrPack('http://localhost:8000/zkr_pack');
     });
+
+    closePackInfo(() => packNum = 0);
+    newPack(packNum);
 });

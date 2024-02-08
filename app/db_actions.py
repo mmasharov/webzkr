@@ -1,7 +1,7 @@
 import json
 from app.dbconn import UseMyDatabase
 
-def getZkrPackList(db):
+def getZkrPackList(db: str):
     """Получение списка пакетов ЗКР"""
     with UseMyDatabase(db) as cursor:
         _SQL = 'SELECT zkr_pack_id, finished, exported, name_ubp, name_tofk FROM zkr_pack;'
@@ -20,7 +20,7 @@ def getZkrPackList(db):
 
     return zkr_list
 
-def getZkrPack(db, pack_id):
+def getZkrPack(db: str, pack_id: int):
     """Получение информации о пакете заявок"""
     with UseMyDatabase(db) as cursor:
         _SQL = f'SELECT budg_level, kod_ubp, name_ubp, kod_tofk, name_tofk, level, cause FROM zkr_pack WHERE zkr_pack_id == {pack_id}'
@@ -39,7 +39,7 @@ def getZkrPack(db, pack_id):
     
     return packdata
 
-def getZkrList(db, parent_id):
+def getZkrList(db: str, parent_id: int):
     """Получение списка ЗКР в пакете"""
     with UseMyDatabase(db) as cursor:
         _SQL = f'SELECT zkr_id, nom_zr, date_zr, name_ubp_pay, sum_v FROM zkr WHERE parent_id == {parent_id}'
@@ -58,7 +58,7 @@ def getZkrList(db, parent_id):
 
     return zkr_list
 
-def getZkrStrList(db, parent_id):
+def getZkrStrList(db: str, parent_id: int):
     """Получение строк заявки"""
     with UseMyDatabase(db) as cursor:
         _SQL = f'SELECT zrst_id, parent_id, type_kbk_pay, kbk_pay, sum_v_kbk FROM zrst WHERE parent_id == {parent_id}'
@@ -77,7 +77,8 @@ def getZkrStrList(db, parent_id):
     
     return zrst_list
 
-def insertZkrPack(db, data_json):
+def insertZkrPack(db: str, data_json) -> None:
+    """Запись в базу данных информации о новом пакете ЗКР"""
     data = json.loads(data_json)
     with UseMyDatabase(db) as cursor:
         _SQL = """INSERT INTO zkr_pack

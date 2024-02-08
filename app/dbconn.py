@@ -3,12 +3,15 @@ import sqlite3
 import os
 
 class MyConnectionError(Exception):
+    """TODO"""
     pass
 
 class MyCredentialsError(Exception):
+    """TODO"""
     pass
 
 class MySQLError(Exception):
+    """TODO"""
     pass
 
 class UseMyDatabase:

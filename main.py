@@ -22,11 +22,13 @@ def showZkrPackList():
 
 @myapi.post('/zkr_pack/')
 def writeZkrPack(data = Body()):
+    """Запись в базу данных информации о новом пакете ЗКР"""
     insertZkrPack(db_path, data)
 
 
 @myapi.get('/zkr_pack/{pack_id}')
 def showZkrPack(pack_id):
+    """Заполнение блока информации о пакете ЗКР"""
     return getZkrPack(db_path, pack_id)
 
 @myapi.get('/zkr/{parent_id}')
