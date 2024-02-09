@@ -1,3 +1,5 @@
+import { state } from "../main.js";
+
 function trimDropdown(str) {
     return str.split('-')[0].trim();
 }
@@ -23,24 +25,32 @@ function addZrString() {
 
 function closePackInfo(callback) {
     const btn = document.querySelector('#closepack'),
-        block = document.querySelector('#zkrpack');
+        block = document.querySelector('#zkrpack'),
+        add = document.querySelector('#addpack');
 
     btn.addEventListener('click', (e) => {
         e.preventDefault();
+        state['packNum'] = 0;
+        add.style.display = 'none';
         block.style.display = 'none';
         callback();
     });
 }
 
-function newPack(packNum) {
+function newPack() {
     const btn = document.querySelector('#newpack'),
         block = document.querySelector('#zkrpack'),
-        formElems = document.forms['zkrpack'];
+        add = document.querySelector('#addpack'),
+        upd = document.querySelector('#updpack'),
+        form = document.forms['zkrpack'];
     
     btn.addEventListener('click', (e) => {
         e.preventDefault();
+        state['packNum'] = 0;
         block.style.display = 'block';
-        for (let elem of formElems) {
+        upd.style.display = 'none';
+        add.style.display = 'inline';
+        for (let elem of form) {
             switch(elem.id) {
                 case 'from-budg_level':
                     elem.value = 1;
@@ -56,4 +66,13 @@ function newPack(packNum) {
     });
 }
 
-export {addZrString, closePackInfo, newPack};
+function updatePack() {
+    const btn = document.querySelector('#updpack');
+
+    btn.addEventListener('click', (e) => {
+        e.preventDefault();
+        console.log(parseInt(state['packNum']));
+    });
+}
+
+export {addZrString, closePackInfo, newPack, updatePack};

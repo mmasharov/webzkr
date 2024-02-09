@@ -81,8 +81,20 @@ def insertZkrPack(db: str, data_json) -> None:
     """Запись в базу данных информации о новом пакете ЗКР"""
     data = json.loads(data_json)
     with UseMyDatabase(db) as cursor:
-        _SQL = """INSERT INTO zkr_pack
-                (format_version, soft_name, soft_version, budg_level, kod_ubp, name_ubp, kod_tofk, name_tofk, level, cause)
-                VALUES
-                ('TXZR220401', 'WebZKR', '1.0', ?, ?, ?, ?, ?, ?, ?)"""
-        cursor.execute(_SQL, (data['from-budg_level'], data['from-kod_ubp'], data['from-name_ubp'], data['to-kod_tofk'], data['to-name_tofk'], data['secure-level'], data['secure-cause'],))
+        if data['pack_id'] == 0:
+            _SQL = """INSERT INTO zkr_pack
+                    (format_version, soft_name, soft_version, budg_level, kod_ubp, name_ubp, kod_tofk, name_tofk, level, cause)
+                    VALUES
+                    ('TXZR220401', 'WebZKR', '1.0', ?, ?, ?, ?, ?, ?, ?)"""
+            cursor.execute(_SQL, (data['from-budg_level'], data['from-kod_ubp'], data['from-name_ubp'], data['to-kod_tofk'], data['to-name_tofk'], data['secure-level'], data['secure-cause'],))
+        else:
+            _SQL = """UPDATE zkr_pack
+                SET budg_level = ?,
+                    kod_ubp = ?,
+                    name_ubp = ?,
+                    kod_tofk = ?,
+                    name_tofk = ?,
+                    level = ?,
+                    cause = ?
+                WHERE zkr_pack_id == ?"""
+            cursor.execute(_SQL, (data['from-budg_level'], data['from-kod_ubp'], data['from-name_ubp'], data['to-kod_tofk'], data['to-name_tofk'], data['secure-level'], data['secure-cause'], data['pack_id'],))

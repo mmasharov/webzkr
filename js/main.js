@@ -1,5 +1,5 @@
 import { ddList } from "./modules/dropdowns.js";
-import { addZrString, closePackInfo, newPack } from "./modules/buttons.js";
+import { addZrString, closePackInfo, newPack, updatePack } from "./modules/buttons.js";
 import { zkrPackList, zkrList, zkrStrList, fillZkrPack } from "./modules/zkr_list.js";
 import { writeZkrPack } from "./modules/zkr_post.js";
 
@@ -9,9 +9,11 @@ const dropdowns = ['from-budg_level', 'secure-level', 'zr-type', 'zr-type_ap', '
             zkrblock = document.querySelector('#zkritem'),
             strblock = document.querySelector('#zkrstr');
 
-let packNum = 0,
-    zrNum = 0,
-    strNum = 0;
+let state = {
+    packNum: 0,
+    zrNum: 0,
+    strNum: 0
+};
 
 const renderZkrPackList = async (id, callback) => {
     await zkrPackList(id);
@@ -24,17 +26,18 @@ const packListEvent = (parentId) => {
     elems.forEach((elem, i) => {
         if (i !== 0) {
             elem.addEventListener('click', () => {
-                packNum = elem.childNodes[2].textContent;
+                state['packNum'] = parseInt(elem.childNodes[2].textContent);
                 packblock.style.display = 'block';
-                zkrList('#zkrlist', packNum, zrListEvent); // Заполняем список заявок в пакете
+                document.querySelector('#updpack').style.display = 'inline';
+                zkrList('#zkrlist', state['packNum'], zrListEvent); // Заполняем список заявок в пакете
                 // Очистка списка строк при смене пакета
                 document.querySelector('#zkrstrlist').querySelectorAll('.zkr__list_item').forEach((item, i) => {
                     if (i !== 0) {
                         item.remove();
                     }
                 });
-                if (packNum) {
-                    fillZkrPack(packNum);
+                if (state['packNum']) {
+                    fillZkrPack(state['packNum']);
                 }
             });
         }
@@ -46,22 +49,22 @@ const zrListEvent = () => {
     strings.forEach((str, j) => {
         if (j !== 0) {
             str.addEventListener('click', () => {
-                zrNum = str.childNodes[0].textContent;
+                state['zrNum'] = parseInt(str.childNodes[0].textContent);
                 zkrblock.style.display = 'block';
-                zkrStrList('#zkrstrlist', zrNum); // Заполняем список строк заявки
+                zkrStrList('#zkrstrlist', state['zrNum']); // Заполняем список строк заявки
             });
         }
     });
 };
 
 window.addEventListener('DOMContentLoaded', () => {
-    if (!packNum) {
+    if (!state['packNum']) {
         packblock.style.display = 'none';
     }
-    if (!zrNum) {
+    if (!state['zrNum']) {
         zkrblock.style.display = 'none';
     }
-    if (!strNum) {
+    if (!state['strNum']) {
         strblock.style.display = 'none';
     }
     // Заполняем выпадающие списки
@@ -78,7 +81,14 @@ window.addEventListener('DOMContentLoaded', () => {
         e.preventDefault();
         writeZkrPack('http://localhost:8000/zkr_pack');
     });
+    document.querySelector('#updpack').addEventListener('click', (e) => {
+        e.preventDefault();
+        writeZkrPack('http://localhost:8000/zkr_pack');
+    });
 
-    closePackInfo(() => packNum = 0);
-    newPack(packNum);
+    closePackInfo(() => state['packNum'] = 0);
+    newPack();
+    updatePack();
 });
+
+export {state};
