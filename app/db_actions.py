@@ -58,6 +58,93 @@ def getZkrList(db: str, parent_id: int):
 
     return zkr_list
 
+def getZkrInfo(db: str, zkr_id: int):
+    """Получение информации о пакете заявок"""
+    with UseMyDatabase(db) as cursor:
+        _SQL = """SELECT guid_fk, type, nom_zr, date_zr, kod_ubp_pay, name_ubp_pay, ls_ubp_pay, inn_ubp, kpp_ubp, glava_grs, name_ubp_grs, name_bud,
+                name_fo, okpo_fo, kod_tofk, name_tofk, date_isp, guid_sv, nom_bo, kod_isp, pr_isp, faip_code, sum_v, kod_v, sum_doc, type_ap,
+                order_pl, vid_pl, purpose, kod_income, name_rcp, inn_rcp, kpp_rcp, ls_ubp_rcp, bs_rcp, name_bic_rcp, bic_rcp, ks_bic_rcp, paystatus,
+                kdoh, okato, osn_pl, nal_per, nom_dok, date_doc, type_pl, id_pp, period_pay, jnt_ls, id_zhku, dol_ruk_ubp, name_ruk_ubp, dol_buh_ubp, name_buh_ubp,
+                date_pod_ubp, nom_zr_fk, date_fk, dol_isp_fk, name_isp_fk, tel_isp_fk, nom_register, id_doc, vid_reestr, osn_plat, vid_osn, nom_osn, date_osn, osn
+                FROM zkr
+                WHERE zkr_id == ?"""
+        cursor.execute(_SQL, (zkr_id,))
+        data = cursor.fetchall()
+
+    zkrdata = {}
+    for item in data:
+        zkrdata['zr-guid_fk'] = item[0]
+        zkrdata['zr-type'] = item[1]
+        zkrdata['zr-nom_zr'] = item[2]
+        zkrdata['zr-date_zr'] = item[3]
+        zkrdata['zr-kod_ubp_pay'] = item[4]
+        zkrdata['zr-name_ubp_pay'] = item[5]
+        zkrdata['zr-ls_ubp_pay'] = item[6]
+        zkrdata['zr-inn_ubp'] = item[7]
+        zkrdata['zr-kpp_ubp'] = item[8]
+        zkrdata['zr-glava_grs'] = item[9]
+        zkrdata['zr-name_ubp_grs'] = item[10]
+        zkrdata['zr-name_bud'] = item[11]
+        zkrdata['zr-name_fo'] = item[12]
+        zkrdata['zr-okpo_fo'] = item[13]
+        zkrdata['zr-kod_tofk'] = item[14]
+        zkrdata['zr-name_tofk'] = item[15]
+        zkrdata['zr-date_isp'] = item[16]
+        zkrdata['zr-guid_sv'] = item[17]
+        zkrdata['zr-nom_bo'] = item[18]
+        zkrdata['zr-kod_isp'] = item[19]
+        zkrdata['zr-pr_isp'] = item[20]
+        zkrdata['zr-faip_code'] = item[21]
+        zkrdata['zr-sum_v'] = item[22]
+        zkrdata['zr-kod_v'] = item[23]
+        zkrdata['zr-sum_doc'] = item[24]
+        zkrdata['zr-type_ap'] = item[25]
+        zkrdata['zr-order_pl'] = item[26]
+        zkrdata['zr-vid_pl'] = item[27]
+        zkrdata['zr-purpose'] = item[28]
+        zkrdata['zr-kod_income'] = item[29]
+        zkrdata['zr-name_rcp'] = item[30]
+        zkrdata['zr-inn_rcp'] = item[31]
+        zkrdata['zr-kpp_rcp'] = item[32]
+        zkrdata['zr-ls_ubp_rcp'] = item[33]
+        zkrdata['zr-bs_rcp'] = item[34]
+        zkrdata['zr-name_bic_rcp'] = item[35]
+        zkrdata['zr-bic_rcp'] = item[36]
+        zkrdata['zr-ks_bic_rcp'] = item[37]
+        zkrdata['zr-paystatus'] = item[38]
+        zkrdata['zr-kdoh'] = item[39]
+        zkrdata['zr-okato'] = item[40]
+        zkrdata['zr-osn_pl'] = item[41]
+        zkrdata['zr-nal_per'] = item[42]
+        zkrdata['zr-nom_dok'] = item[43]
+        zkrdata['zr-date_dok'] = item[44]
+        zkrdata['zr-type_pl'] = item[45]
+        zkrdata['zr-id_pp'] = item[46]
+        zkrdata['zr-period_pay'] = item[47]
+        zkrdata['zr-jnt_ls'] = item[48]
+        zkrdata['zr-id_zhku'] = item[49]
+        zkrdata['zr-dol_ruk_ubp'] = item[50]
+        zkrdata['zr-name_ruk_ubp'] = item[51]
+        zkrdata['zr-dol_buh_ubp'] = item[52]
+        zkrdata['zr-name_buh_ubp'] = item[53]
+        zkrdata['zr-date_pod_ubp'] = item[54]
+        zkrdata['zr-nom_zr_fk'] = item[55]
+        zkrdata['zr-date_fk'] = item[56]
+        zkrdata['zr-dol_isp_fk'] = item[57]
+        zkrdata['zr-name_isp_fk'] = item[58]
+        zkrdata['zr-tel_isp_fk'] = item[59]
+        zkrdata['zrcontr-nom_register'] = item[60]
+        zkrdata['zrcontr-id_doc'] = item[61]
+        zkrdata['zrcontr-vid_reestr'] = item[62]
+        zkrdata['zrosn-osn_plat'] = item[63]
+        zkrdata['zrosn-vid_osn'] = item[64]
+        zkrdata['zrosn-nom_osn'] = item[65]
+        zkrdata['zrosn-date_osn'] = item[66]
+        zkrdata['zrosn-osn'] = item[67]
+
+    return zkrdata
+        
+
 def getZkrStrList(db: str, parent_id: int):
     """Получение строк заявки"""
     with UseMyDatabase(db) as cursor:
