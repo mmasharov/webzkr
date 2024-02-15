@@ -33,6 +33,7 @@ function closePackInfo(callback) {
         state['packNum'] = 0;
         add.style.display = 'none';
         block.style.display = 'none';
+        btn.style.display = 'none';
         callback();
     });
 }
@@ -42,6 +43,7 @@ function newPack() {
         block = document.querySelector('#zkrpack'),
         add = document.querySelector('#addpack'),
         upd = document.querySelector('#updpack'),
+        close = document.querySelector('#closepack'),
         form = document.forms['zkrpack'];
     
     btn.addEventListener('click', (e) => {
@@ -50,6 +52,7 @@ function newPack() {
         block.style.display = 'block';
         upd.style.display = 'none';
         add.style.display = 'inline';
+        close.style.display = 'inline';
         for (let elem of form) {
             switch(elem.id) {
                 case 'from-budg_level':

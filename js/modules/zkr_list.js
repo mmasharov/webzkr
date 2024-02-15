@@ -1,5 +1,12 @@
 import { getResource } from "../services/requests.js";
 
+const dateRegexp = /date_\w+/g;
+
+function listDate(date) {
+    const listDate = date.split('-');
+    return `${listDate[2]}.${listDate[1]}.${listDate[0]}`;
+}
+
 function fillZkrList(parent, data, mod) {
     const parentElem = document.querySelector(parent);
     parentElem.querySelectorAll('.zkr__list_item').forEach((item, i) => {
@@ -17,7 +24,12 @@ function fillZkrList(parent, data, mod) {
         for (let cell in item) {
             let cellBlock = document.createElement('div');
             cellBlock.setAttribute('id', cell);
-            cellBlock.textContent = item[cell];
+            if (cell.match(dateRegexp)) {
+                cellBlock.textContent = listDate(item[cell]);
+            } else {
+                cellBlock.textContent = item[cell];
+            }
+            
             zkrItem.appendChild(cellBlock);
         }
 
@@ -25,7 +37,7 @@ function fillZkrList(parent, data, mod) {
     }
 }
 
-function fillZkrInfo(data) {
+function fillInfo(data) {
     for (let item in data) {
         document.querySelector(`#${item}`).value = data[item];
     }
@@ -49,7 +61,12 @@ const zkrStrList = async (id, parent_id) => {
 
 const fillZkrPack = async (id) => {
     await getResource(`http://localhost:8000/zkr_pack/${id}`)
-        .then(res => fillZkrInfo(res));
+        .then(res => fillInfo(res));
 }
 
-export { zkrPackList, zkrList, zkrStrList, fillZkrPack };
+const fillZkrInfo = async (id) => {
+    await getResource(`http://localhost:8000/zkr_info/${id}`)
+        .then(res => fillInfo(res));
+};
+
+export { zkrPackList, zkrList, zkrStrList, fillZkrPack, fillZkrInfo };

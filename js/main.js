@@ -1,6 +1,6 @@
 import { ddList } from "./modules/dropdowns.js";
 import { addZrString, closePackInfo, newPack, updatePack } from "./modules/buttons.js";
-import { zkrPackList, zkrList, zkrStrList, fillZkrPack } from "./modules/zkr_list.js";
+import { zkrPackList, zkrList, zkrStrList, fillZkrPack, fillZkrInfo } from "./modules/zkr_list.js";
 import { writeZkrPack } from "./modules/zkr_post.js";
 
 const dropdowns = ['from-budg_level', 'secure-level', 'zr-type', 'zr-type_ap', 'zr-vid_pl', 'zr-kod_income',
@@ -52,6 +52,9 @@ const zrListEvent = () => {
                 state['zrNum'] = parseInt(str.childNodes[0].textContent);
                 zkrblock.style.display = 'block';
                 zkrStrList('#zkrstrlist', state['zrNum']); // Заполняем список строк заявки
+                if (state['zrNum']) {
+                    fillZkrInfo(state['zrNum']);
+                }
             });
         }
     });
