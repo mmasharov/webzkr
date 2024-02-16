@@ -51,10 +51,22 @@ const zrListEvent = () => {
             str.addEventListener('click', () => {
                 state['zrNum'] = parseInt(str.childNodes[0].textContent);
                 zkrblock.style.display = 'block';
-                zkrStrList('#zkrstrlist', state['zrNum']); // Заполняем список строк заявки
+                zkrStrList('#zkrstrlist', state['zrNum'], zrStringEvent); // Заполняем список строк заявки
                 if (state['zrNum']) {
                     fillZkrInfo(state['zrNum']);
                 }
+            });
+        }
+    });
+};
+
+const zrStringEvent = () => {
+    const zrStrings = document.querySelector('#zkrstrlist').querySelectorAll('.zkr__list_item');
+    zrStrings.forEach((str, i) => {
+        if (i !== 0) {
+            str.addEventListener('click', () => {
+                state['strNum'] = parseInt(str.childNodes[0].textContent);
+                strblock.style.display = 'block';
             });
         }
     });

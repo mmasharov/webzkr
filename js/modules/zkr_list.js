@@ -54,9 +54,10 @@ const zkrList = async (id, parent_id, callback) => {
     callback();
 };
 
-const zkrStrList = async (id, parent_id) => {
+const zkrStrList = async (id, parent_id, callback) => {
     await getResource(`http://localhost:8000/zrst/${parent_id}`)
         .then(res => fillZkrList(id, res, 'str'));
+    callback();
 }
 
 const fillZkrPack = async (id) => {
