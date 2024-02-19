@@ -23,7 +23,7 @@ function addZrString() {
     });
 }
 
-function closePackInfo(callback) {
+function closePackInfo() {
     const btn = document.querySelector('#closepack'),
         block = document.querySelector('#zkrpack'),
         add = document.querySelector('#addpack');
@@ -34,7 +34,20 @@ function closePackInfo(callback) {
         add.style.display = 'none';
         block.style.display = 'none';
         btn.style.display = 'none';
-        callback();
+    });
+}
+
+function closeZrInfo() {
+    const btn = document.querySelector('#closezkr'),
+        block = document.querySelector('#zkritem'),
+        add = document.querySelector('#addzkr');
+    
+    btn.addEventListener('click', (e) => {
+        e.preventDefault();
+        state['zrNum'] = 0;
+        add.style.display = 'none';
+        block.style.display = 'none';
+        btn.style.display = 'none';
     });
 }
 
@@ -78,4 +91,4 @@ function updatePack() {
     });
 }
 
-export {addZrString, closePackInfo, newPack, updatePack};
+export {addZrString, closePackInfo, newPack, updatePack, closeZrInfo};

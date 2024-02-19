@@ -1,6 +1,6 @@
 import { ddList } from "./modules/dropdowns.js";
-import { addZrString, closePackInfo, newPack, updatePack } from "./modules/buttons.js";
-import { zkrPackList, zkrList, zkrStrList, fillZkrPack, fillZkrInfo } from "./modules/zkr_list.js";
+import { addZrString, closePackInfo, newPack, updatePack, closeZrInfo } from "./modules/buttons.js";
+import { zkrPackList, zkrList, zkrStrList, fillZkrPack, fillZkrInfo, fillStrInfo } from "./modules/zkr_list.js";
 import { writeZkrPack } from "./modules/zkr_post.js";
 
 const dropdowns = ['from-budg_level', 'secure-level', 'zr-type', 'zr-type_ap', 'zr-vid_pl', 'zr-kod_income',
@@ -39,6 +39,7 @@ const packListEvent = (parentId) => {
                 if (state['packNum']) {
                     fillZkrPack(state['packNum']);
                 }
+                document.querySelector('#closepack').style.display = 'inline';
             });
         }
     });
@@ -55,6 +56,7 @@ const zrListEvent = () => {
                 if (state['zrNum']) {
                     fillZkrInfo(state['zrNum']);
                 }
+                document.querySelector('#closezkr').style.display = 'inline';
             });
         }
     });
@@ -67,6 +69,9 @@ const zrStringEvent = () => {
             str.addEventListener('click', () => {
                 state['strNum'] = parseInt(str.childNodes[0].textContent);
                 strblock.style.display = 'block';
+                if (state['zrNum']) {
+                    fillStrInfo(state['zrNum']);
+                }
             });
         }
     });
@@ -101,9 +106,10 @@ window.addEventListener('DOMContentLoaded', () => {
         writeZkrPack('http://localhost:8000/zkr_pack');
     });
 
-    closePackInfo(() => state['packNum'] = 0);
+    closePackInfo();
     newPack();
     updatePack();
+    closeZrInfo();
 });
 
 export {state};

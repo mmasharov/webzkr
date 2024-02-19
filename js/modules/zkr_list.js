@@ -70,4 +70,9 @@ const fillZkrInfo = async (id) => {
         .then(res => fillInfo(res));
 };
 
-export { zkrPackList, zkrList, zkrStrList, fillZkrPack, fillZkrInfo };
+const fillStrInfo = async (id) => {
+    await getResource(`http://localhost:8000/zrst_info/${id}`)
+        .then(res => fillInfo(res));
+};
+
+export { zkrPackList, zkrList, zkrStrList, fillZkrPack, fillZkrInfo, fillStrInfo };

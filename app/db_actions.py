@@ -164,6 +164,31 @@ def getZkrStrList(db: str, parent_id: int):
     
     return zrst_list
 
+def getStrInfo(db: str, str_id: int):
+    """"Получение информации о строке звявки"""
+    with UseMyDatabase(db) as cursor:
+        _SQL = """SELECT kod_ist_kbk, type_kbk_pay, kbk_pay, type_kbk_rcp, kbk_rcp, add_klass_pay, add_klass_rcp, sum_v_kbk, sum_r_kbk, purpose_kbk, note_kbk
+                FROM zrst
+                WHERE zrst_id = ?"""
+        cursor.execute(_SQL, (str_id,))
+        data = cursor.fetchall()
+    
+    strdata = {}
+    for item in data:
+        strdata['zrst-kod_ist_kbk'] = item[0]
+        strdata['zrst-type_kbk_pay'] = item[1]
+        strdata['zrst-kbk_pay'] = item[2]
+        strdata['zrst-type_kbk_rcp'] = item[3]
+        strdata['zrst-kbk_rcp'] = item[4]
+        strdata['zrst-add_klass_pay'] = item[5]
+        strdata['zrst-add_klass_rcp'] = item[6]
+        strdata['zrst-sum_v_kbk'] = item[7]
+        strdata['zrst-sum_r_kbk'] = item[8]
+        strdata['zrst-purpose_kbk'] = item[9]
+        strdata['zrst-note_kbk'] = item[10]
+
+    return strdata
+
 def insertZkrPack(db: str, data_json) -> None:
     """Запись в базу данных информации о новом пакете ЗКР"""
     data = json.loads(data_json)

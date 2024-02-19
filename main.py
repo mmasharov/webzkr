@@ -1,7 +1,7 @@
 from fastapi import FastAPI, Body
 from fastapi.middleware.cors import CORSMiddleware
 from app.dropdown_element import getDropdownElements
-from app.db_actions import getZkrPackList, getZkrList, getZkrStrList, getZkrPack, insertZkrPack, getZkrInfo
+from app.db_actions import getZkrPackList, getZkrList, getZkrStrList, getZkrPack, insertZkrPack, getZkrInfo, getStrInfo
 
 origins = ["http://localhost", "http://localhost:4000"]
 db_path = 'assets\\zkr.db'
@@ -45,6 +45,11 @@ def showZkrInfo(zkr_id):
 def showZrstList(parent_id):
     """Отображение списка строк заявки"""
     return getZkrStrList(db_path, parent_id)
+
+@myapi.get('/zrst_info/{str_id}')
+def showStrInfo(str_id):
+    return getStrInfo(db_path, str_id)
+
 
 @myapi.get('/budg_level/')
 def getBudgLevels():
